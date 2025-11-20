@@ -1,0 +1,90 @@
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+
+const LANGUAGE_CONFIG = {
+  us: { key: 'us', intlLocale: 'en-US', currency: 'USD' },
+  uk: { key: 'uk', intlLocale: 'en-GB', currency: 'GBP' },
+  de: { key: 'de', intlLocale: 'de-DE', currency: 'EUR' },
+  tr: { key: 'tr', intlLocale: 'tr-TR', currency: 'TRY' },
+  fr: { key: 'fr', intlLocale: 'fr-FR', currency: 'EUR' },
+  es: { key: 'es', intlLocale: 'es-ES', currency: 'EUR' },
+}
+
+const TRANSLATIONS = {
+  tr: {
+    'nav.collection': 'Koleksiyon',
+    'nav.maison': 'Maison',
+    'nav.cart': 'Sepet',
+
+    'home.atelierLabel': 'Albert R. Kolin Atelier',
+    'home.hero.titleMain': 'Zamansýz formlar,',
+    'home.hero.titleAccent': 'kiþisel ritminize göre tasarlandý.',
+    'home.hero.body':
+      'Louis Vuitton estetiðinden ilham alan, ultra minimal ve dokunsal bir dijital butik. Her parça, görünmez detaylarla rafine edildi.',
+    'home.hero.tags.bags': 'Çanta',
+    'home.hero.tags.shoes': 'Ayakkabý',
+    'home.hero.tags.accessories': 'Aksesuar',
+    'home.hero.panel.new': 'Yeni Koleksiyon',
+    'home.hero.panel.body':
+      'Atelier Noir serisi, mimari hatlarý yumuþak formlarla buluþturur. Þehir ýþýklarý için tasarlandý.',
+    'home.hero.panel.baseline': 'Çizgi · Denge · Sessizlik',
+    'home.collection.label': 'Yeni Koleksiyon',
+    'home.collection.title': 'Atelier Noir · Ýlk Drop',
+    'home.maisonNote.label': 'Maison Notu',
+    'home.maisonNote.body':
+      'Albert R. Kolin, her parçayý görünmez detaylar, yavaþ ritimler ve zamansýz silüetler etrafýnda kurgulayan bir maison’dur. Koleksiyonlar, sezonsuz ve þehir hayatýna uyarlanabilir olacak þekilde tasarlanýr.',
+
+    'cart.label': 'Sepet',
+    'cart.title.nonEmpty': 'Seçili parçalarýnýz',
+    'cart.title.empty': 'Sepetiniz þu an sakin',
+    'cart.subtitle':
+      'Sipariþi tamamlamadan önce adetleri güncelleyebilir veya dilediðiniz ürünü sessizce çýkarabilirsiniz.',
+    'cart.remove': 'Ürünü kaldýr',
+    'cart.empty.description':
+      'Sepetinizde henüz ürün yok. Koleksiyonu keþfederek ritminize uygun parçalarý seçebilirsiniz.',
+    'cart.empty.cta': 'Koleksiyona dön',
+    'cart.cta.checkout': 'Ödemeye ilerle',
+
+    'checkout.label': 'Ödeme',
+    'checkout.title': 'Son adým: onay ve teslimat',
+    'checkout.subtitle':
+      'Tüm bilgileriniz SSL ile korunur; ödeme, güncel güvenlik standartlarý ile iþlenir.',
+    'checkout.sections.info': 'Bilgiler',
+    'checkout.sections.shipping': 'Teslimat',
+    'checkout.sections.payment': 'Ödeme',
+    'checkout.fields.fullName': 'Ad Soyad',
+    'checkout.fields.email': 'E-posta',
+    'checkout.fields.phone': 'Telefon',
+    'checkout.fields.address': 'Adres',
+    'checkout.fields.city': 'Þehir',
+    'checkout.fields.postalCode': 'Posta Kodu',
+    'checkout.fields.country': 'Ülke',
+    'checkout.fields.cardName': 'Kart üzerindeki isim',
+    'checkout.fields.cardNumber': 'Kart numarasý',
+    'checkout.fields.expiry': 'Son kullanma',
+    'checkout.fields.cvv': 'Güvenlik kodu',
+    'checkout.submit': 'Ödemeyi tamamla ve onayla',
+    'checkout.submitting': 'Sipariþiniz hazýrlanýyor...',
+    'form.required': 'Zorunlu',
+
+    'product.back': 'Koleksiyona dön',
+    'product.details.label': 'Detaylar',
+    'product.shippingNote':
+      'Tüm gönderimler karbon nötr kargo ile, 2–4 iþ günü içerisinde adresinize ulaþtýrýlýr.',
+    'product.addToCart': 'Sepete ekle',
+
+    'summary.label': 'Özet',
+    'summary.taxes': 'Vergiler dahil',
+    'summary.subtotal': 'Ara toplam',
+    'summary.shipping': 'Kargo',
+    'summary.shippingIncluded': 'Dahil',
+    'summary.total': 'Genel Toplam',
+
+    'quantity.decrease': 'Azalt',
+    'quantity.increase': 'Artýr',
+  },
+  us: {
+    'nav.collection': 'Collection',
+    'nav.maison': 'Maison',
+    'nav.cart': 'Cart',
+
+    'home.atelierLabel': 'Albert R. Kolin Atelier',
