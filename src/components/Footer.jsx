@@ -8,10 +8,17 @@ const SHIPPING_COUNTRY_BY_LANGUAGE = {
   de: 'Germany',
   fr: 'France',
   es: 'Spain',
+  it: 'Italy',
+  kr: 'South Korea',
+  pt: 'Portugal',
+  az: 'Azerbaijan',
+  ar: 'United Arab Emirates',
+  ja: 'Japan',
+  ru: 'Russia',
 }
 
 export function Footer() {
-  const { language } = useLocale()
+  const { language, t } = useLocale()
   const country = SHIPPING_COUNTRY_BY_LANGUAGE[language] ?? 'Netherlands'
 
   return (
@@ -30,7 +37,7 @@ export function Footer() {
                   Albert R. Kolin
                 </p>
                 <p className="text-sm font-medium leading-relaxed text-ink md:text-base">
-                  Join the maison of quietly luxurious pieces crafted for your own rhythm.
+                  {t('footer.banner.body')}
                 </p>
               </div>
 
@@ -38,7 +45,7 @@ export function Footer() {
                 type="button"
                 className="mt-4 inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 text-[11px] uppercase tracking-[0.3em] text-ivory transition-colors hover:bg-accent md:mt-0"
               >
-                Discover collection
+                {t('footer.banner.cta')}
               </button>
             </div>
           </div>
@@ -64,8 +71,7 @@ export function Footer() {
               </div>
 
               <p className="max-w-sm text-sm leading-relaxed text-ivory/60">
-                Crafted pieces inspired by silent elegance.
-                A maison shaped by restraint, intention and heritage.
+                {t('footer.description')}
               </p>
 
               <p className="text-[11px] uppercase tracking-[0.3em] text-ivory/45">
@@ -76,15 +82,23 @@ export function Footer() {
             {/* Navigation */}
             <div className="flex gap-24 text-[11px] uppercase tracking-[0.28em] pl-4">
               <div className="space-y-4">
-                <p className="text-ivory/85">Collection</p>
-                <p className="text-ivory/55 hover:text-ivory transition-colors">Maison</p>
-                <p className="text-ivory/55 hover:text-ivory transition-colors">Client care</p>
+                <p className="text-ivory/85">{t('nav.collection')}</p>
+                <p className="text-ivory/55 hover:text-ivory transition-colors">
+                  {t('nav.maison')}
+                </p>
+                <p className="text-ivory/55 hover:text-ivory transition-colors">
+                  {t('footer.clientCare')}
+                </p>
               </div>
 
               <div className="space-y-4">
-                <p className="text-ivory/85">Contact</p>
-                <p className="text-ivory/55 hover:text-ivory transition-colors">Press</p>
-                <p className="text-ivory/55 hover:text-ivory transition-colors">Instagram</p>
+                <p className="text-ivory/85">{t('footer.contact')}</p>
+                <p className="text-ivory/55 hover:text-ivory transition-colors">
+                  {t('footer.press')}
+                </p>
+                <p className="text-ivory/55 hover:text-ivory transition-colors">
+                  {t('footer.instagram')}
+                </p>
               </div>
             </div>
           </div>
@@ -96,7 +110,7 @@ export function Footer() {
                           px-2 md:px-4 lg:px-6">
 
             <div className="flex items-center gap-3">
-              <span>Shipping from</span>
+              <span>{t('footer.shippingFrom')}</span>
               <span className="text-ivory">{country}</span>
             </div>
 
@@ -105,9 +119,13 @@ export function Footer() {
               Albert KOLIN
             </div>
 
-            <div className="text-[10px] tracking-[0.22em] text-ivory/40">
+            <div className="hidden text-[10px] tracking-[0.22em] text-ivory/40">
               © 2025 Albert R. Kolin · All rights reserved.
             </div>
+          </div>
+
+          <div className="text-[10px] tracking-[0.22em] text-ivory/40">
+            {t('footer.copyright')}
           </div>
 
         </div>

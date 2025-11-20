@@ -66,7 +66,7 @@ export function Header() {
             <Link
               to={`${basePath}/search`}
               className={`inline-flex h-6 w-6 items-center justify-center ${primaryTextClass}`}
-              aria-label={language === 'tr' ? 'Arama' : 'Search'}
+              aria-label={t('search.title')}
             >
               <HiOutlineMagnifyingGlass className="h-5 w-5" />
             </Link>
@@ -120,7 +120,9 @@ export function Header() {
                 className="inline-flex items-center gap-2"
               >
                 <RxCross1 className="h-3 w-3" />
-                <span className="uppercase tracking-[0.25em]">Close</span>
+                <span className="uppercase tracking-[0.25em]">
+                  {t('header.close')}
+                </span>
               </button>
             </div>
 

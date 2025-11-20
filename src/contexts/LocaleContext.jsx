@@ -7,6 +7,13 @@ const LANGUAGE_CONFIG = {
   tr: { key: 'tr', intlLocale: 'tr-TR', currency: 'TRY' },
   fr: { key: 'fr', intlLocale: 'fr-FR', currency: 'EUR' },
   es: { key: 'es', intlLocale: 'es-ES', currency: 'EUR' },
+  it: { key: 'it', intlLocale: 'it-IT', currency: 'EUR' },
+  kr: { key: 'kr', intlLocale: 'ko-KR', currency: 'KRW' },
+  pt: { key: 'pt', intlLocale: 'pt-PT', currency: 'EUR' },
+  az: { key: 'az', intlLocale: 'az-AZ', currency: 'AZN' },
+  ar: { key: 'ar', intlLocale: 'ar-AE', currency: 'AED' },
+  ja: { key: 'ja', intlLocale: 'ja-JP', currency: 'JPY' },
+  ru: { key: 'ru', intlLocale: 'ru-RU', currency: 'RUB' },
 }
 
 const TRANSLATIONS = {
@@ -223,6 +230,117 @@ const TRANSLATIONS = {
   },
 }
 
+const EXTRA_TRANSLATIONS = {
+  tr: {
+    'home.hero.overlay.top': 'Discover',
+    'home.hero.overlay.main': 'Anatolian Blue',
+    'home.hero.overlay.bottom': 'Albert Kolin imzasıyla',
+
+    'search.title': 'Arama',
+    'search.subtitle': 'Koleksiyonda ara',
+    'search.placeholder': 'Ürün, kategori veya koleksiyon ara',
+    'search.empty': 'Aramanızla eşleşen ürün bulunamadı.',
+
+    'category.label': 'Kategori',
+    'category.description':
+      'Seçtiğiniz kategori için küratörlüğü yapılmış parçalar.',
+    'category.empty': 'Bu kategoride şimdilik ürün bulunmuyor.',
+    'category.gender.women': 'Kadın',
+    'category.gender.men': 'Erkek',
+    'category.category.bags': 'Çanta',
+    'category.category.shoes': 'Ayakkabı',
+    'category.category.accessories': 'Aksesuar',
+
+    'product.notFound': 'Ürün bulunamadı.',
+    'product.quantityLabel': 'Adet',
+    'product.added': 'Sepete eklendi',
+
+    'checkout.emptyCartWarning':
+      'Ödeme adımına geçmek için sepetinize en az bir ürün ekleyin.',
+    'checkout.address.placeholder': 'Sokak, bina, daire',
+    'checkout.city.placeholder': 'Şehir seçin',
+    'checkout.payment.googlePay': 'Google Pay ile öde',
+    'checkout.payment.iyzico': 'iyzico ile öde',
+    'checkout.payment.card': 'Kredi kartı ile öde',
+    'checkout.orderSummary.title': 'Sipariş özeti',
+
+    'checkout.card.placeholderName': 'Kart sahibinin adı',
+    'checkout.card.securityCodeLabel': 'Güvenlik kodu',
+    'checkout.card.cardholderLabel': 'Kart sahibi',
+    'checkout.card.expiresLabel': 'Son kullanma',
+
+    'header.close': 'Kapat',
+
+    'footer.banner.body':
+      'Kendi ritminiz için tasarlanmış, sessiz bir lükse sahip parçaların maison’una katılın.',
+    'footer.banner.cta': 'Koleksiyonu keşfet',
+    'footer.description':
+      'Sessiz zarafetten ilham alan işçilikli parçalar. Sadelik, niyet ve miras ile şekillenen bir maison.',
+    'footer.clientCare': 'Müşteri hizmetleri',
+    'footer.contact': 'İletişim',
+    'footer.press': 'Basın',
+    'footer.instagram': 'Instagram',
+    'footer.shippingFrom': 'Gönderim noktası',
+    'footer.copyright':
+      '© 2025 Albert R. Kolin – Tüm hakları saklıdır.',
+  },
+  us: {
+    'home.hero.overlay.top': 'Discover',
+    'home.hero.overlay.main': 'Anatolian Blue',
+    'home.hero.overlay.bottom': 'from Albert Kolin',
+
+    'search.title': 'Search',
+    'search.subtitle': 'Search the collection',
+    'search.placeholder':
+      'Search products, categories or collections',
+    'search.empty': 'No products match your search.',
+
+    'category.label': 'Category',
+    'category.description':
+      'Curated pieces for the selected category.',
+    'category.empty':
+      'There are no products in this category yet.',
+    'category.gender.women': 'Women',
+    'category.gender.men': 'Men',
+    'category.category.bags': 'Bags',
+    'category.category.shoes': 'Shoes',
+    'category.category.accessories': 'Accessories',
+
+    'product.notFound': 'Product not found.',
+    'product.quantityLabel': 'Quantity',
+    'product.added': 'Added to cart',
+
+    'checkout.emptyCartWarning':
+      'Add at least one item to your bag before proceeding to checkout.',
+    'checkout.address.placeholder': 'Street, building, apartment',
+    'checkout.city.placeholder': 'Select city',
+    'checkout.payment.googlePay': 'Pay with Google Pay',
+    'checkout.payment.iyzico': 'Pay with iyzico',
+    'checkout.payment.card': 'Pay with card',
+    'checkout.orderSummary.title': 'Order summary',
+
+    'checkout.card.placeholderName': 'Cardholder name',
+    'checkout.card.securityCodeLabel': 'Security code',
+    'checkout.card.cardholderLabel': 'Cardholder',
+    'checkout.card.expiresLabel': 'Expires',
+
+    'header.close': 'Close',
+
+    'footer.banner.body':
+      'Join the maison of quietly luxurious pieces crafted for your own rhythm.',
+    'footer.banner.cta': 'Discover collection',
+    'footer.description':
+      'Crafted pieces inspired by silent elegance. A maison shaped by restraint, intention and heritage.',
+    'footer.clientCare': 'Client care',
+    'footer.contact': 'Contact',
+    'footer.press': 'Press',
+    'footer.instagram': 'Instagram',
+    'footer.shippingFrom': 'Shipping from',
+    'footer.copyright':
+      '© 2025 Albert R. Kolin – All rights reserved.',
+  },
+}
+
 const LocaleContext = createContext(null)
 
 export function LocaleProvider({ children, languageKey = 'tr' }) {
@@ -247,11 +365,25 @@ export function LocaleProvider({ children, languageKey = 'tr' }) {
 
   const formatCurrency = (value) => formatter.format(value)
 
+  const getTable = (lang) => ({
+    ...(TRANSLATIONS[lang] || {}),
+    ...(EXTRA_TRANSLATIONS[lang] || {}),
+  })
+
   const t = (key) => {
-    const table = TRANSLATIONS[language] || {}
-    if (table[key]) return table[key]
-    if (language !== 'us' && TRANSLATIONS.us?.[key]) return TRANSLATIONS.us[key]
-    if (language !== 'tr' && TRANSLATIONS.tr?.[key]) return TRANSLATIONS.tr[key]
+    const primary = getTable(language)
+    if (primary[key]) return primary[key]
+
+    if (language !== 'us') {
+      const fallbackUs = getTable('us')
+      if (fallbackUs[key]) return fallbackUs[key]
+    }
+
+    if (language !== 'tr') {
+      const fallbackTr = getTable('tr')
+      if (fallbackTr[key]) return fallbackTr[key]
+    }
+
     return key
   }
 
@@ -272,4 +404,3 @@ export function useLocale() {
   }
   return context
 }
-

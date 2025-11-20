@@ -1,9 +1,30 @@
-import { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
 const CartContext = createContext(null)
+const STORAGE_KEY = 'ark:cart'
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState(() => {
+    if (typeof window === 'undefined') return []
+
+    try {
+      const stored = window.localStorage.getItem(STORAGE_KEY)
+      if (!stored) return []
+
+      const parsed = JSON.parse(stored)
+      return Array.isArray(parsed) ? parsed : []
+    } catch {
+      return []
+    }
+  })
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+    } catch {
+      // ignore write errors (e.g. private mode)
+    }
+  }, [items])
 
   const addToCart = (product, quantity = 1) => {
     setItems((current) => {
@@ -66,4 +87,3 @@ export function useCart() {
   }
   return context
 }
-

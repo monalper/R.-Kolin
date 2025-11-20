@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
-import { products } from '../data/products.js'
+import { products } from '../data/allProducts.js'
 import { ProductCard } from '../components/ProductCard.jsx'
 import { useLocale } from '../contexts/LocaleContext.jsx'
 
 export function SearchPage() {
-  const { language } = useLocale()
+  const { language, t } = useLocale()
   const [query, setQuery] = useState('')
 
   const normalizedQuery = query.trim().toLowerCase()
@@ -30,14 +30,17 @@ export function SearchPage() {
 
   const isTr = language === 'tr'
 
-  const title = isTr ? 'Arama' : 'Search'
-  const subtitle = isTr ? 'Koleksiyonda ara' : 'Search the collection'
+  const title = t('search.title')
+  const subtitle = t('search.subtitle')
   const placeholder = isTr
     ? 'Ürün, kategori veya koleksiyon ara'
     : 'Search products, categories or collections'
   const emptyText = isTr
     ? 'Aramanızla eşleşen ürün bulunamadı.'
     : 'No products match your search.'
+
+  const placeholderText = t('search.placeholder')
+  const emptyLabel = t('search.empty')
 
   return (
     <section className="space-y-8">
@@ -53,7 +56,7 @@ export function SearchPage() {
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder={placeholder}
+          placeholder={placeholderText}
           className="w-full bg-transparent text-sm text-ink placeholder:text-ink/40 focus:outline-none md:text-base"
         />
       </div>
@@ -65,9 +68,8 @@ export function SearchPage() {
           ))}
         </div>
       ) : (
-        <p className="text-sm leading-relaxed text-ink/70">{emptyText}</p>
+        <p className="text-sm leading-relaxed text-ink/70">{emptyLabel}</p>
       )}
     </section>
   )
 }
-

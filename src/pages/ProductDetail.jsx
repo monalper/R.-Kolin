@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getProductBySlug } from '../data/products.js'
+import { getProductBySlug } from '../data/allProducts.js'
 import { useCart } from '../contexts/CartContext.jsx'
 import { QuantitySelector } from '../components/QuantitySelector.jsx'
 import { useLocale } from '../contexts/LocaleContext.jsx'
@@ -140,7 +140,7 @@ export function ProductDetail() {
 
           <div className="space-y-6 rounded-3xl bg-ivory px-5 py-6 md:px-6 md:py-7">
             <div className="flex items-center justify-between text-xs uppercase tracking-[0.25em]">
-              <span>Adet</span>
+              <span>{t('product.quantityLabel')}</span>
               <QuantitySelector value={quantity} onChange={setQuantity} />
             </div>
             <p className="text-xs leading-relaxed text-ink/60">
@@ -151,7 +151,7 @@ export function ProductDetail() {
               onClick={handleAddToCart}
               className="inline-flex w-full items-center justify-center rounded-full bg-ink px-6 py-3 text-[11px] uppercase tracking-[0.3em] text-ivory hover:bg-accent"
             >
-              {added ? 'Sepete eklendi' : t('product.addToCart')}
+              {added ? t('product.added') : t('product.addToCart')}
             </button>
           </div>
 

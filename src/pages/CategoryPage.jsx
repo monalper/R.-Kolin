@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom'
-import { products } from '../data/products.js'
+import { products } from '../data/allProducts.js'
 import { ProductCard } from '../components/ProductCard.jsx'
 import { useLocale } from '../contexts/LocaleContext.jsx'
 
 export function CategoryPage({ gender }) {
   const { category } = useParams()
-  const { language } = useLocale()
+  const { t } = useLocale()
 
   const normalizedCategory = category ?? ''
 
@@ -15,50 +15,33 @@ export function CategoryPage({ gender }) {
       (product.gender === gender || product.gender === 'unisex'),
   )
 
-  const genderLabel =
-    gender === 'women'
-      ? language === 'tr'
-        ? 'Kadın'
-        : 'Women'
-      : language === 'tr'
-        ? 'Erkek'
-        : 'Men'
+  const translatedGenderLabel =
+    gender === 'women' ? t('category.gender.women') : t('category.gender.men')
 
-  const categoryLabelsTr = {
-    bags: 'Çanta',
-    shoes: 'Ayakkabı',
-    accessories: 'Aksesuar',
-  }
+  const translatedCategoryKey =
+    normalizedCategory === 'bags'
+      ? 'category.category.bags'
+      : normalizedCategory === 'shoes'
+        ? 'category.category.shoes'
+        : normalizedCategory === 'accessories'
+          ? 'category.category.accessories'
+          : null
 
-  const categoryLabelsEn = {
-    bags: 'Bags',
-    shoes: 'Shoes',
-    accessories: 'Accessories',
-  }
+  const translatedCategoryLabel =
+    (translatedCategoryKey && t(translatedCategoryKey)) || normalizedCategory
 
-  const categoryLabel =
-    (language === 'tr'
-      ? categoryLabelsTr[normalizedCategory]
-      : categoryLabelsEn[normalizedCategory]) || normalizedCategory
-
-  const title =
-    language === 'tr'
-      ? `${genderLabel} ${categoryLabel}`
-      : `${genderLabel} ${categoryLabel}`
-
+  const title = `${translatedGenderLabel} ${translatedCategoryLabel}`
   const hasProducts = filteredProducts.length > 0
 
   return (
     <section className="space-y-8">
       <header className="space-y-3 text-center md:text-left">
         <p className="text-[11px] uppercase tracking-[0.35em] text-ink/60">
-          {language === 'tr' ? 'Kategori' : 'Category'}
+          {t('category.label')}
         </p>
         <h1 className="text-2xl font-medium md:text-3xl">{title}</h1>
         <p className="text-sm leading-relaxed text-ink/70">
-          {language === 'tr'
-            ? 'Seçtiğiniz kategori için küratörlüğü yapılmış parçalar.'
-            : 'Curated pieces for the selected category.'}
+          {t('category.description')}
         </p>
       </header>
 
@@ -70,12 +53,9 @@ export function CategoryPage({ gender }) {
         </div>
       ) : (
         <p className="text-sm leading-relaxed text-ink/70">
-          {language === 'tr'
-            ? 'Bu kategoride şimdilik ürün bulunmuyor.'
-            : 'There are no products in this category yet.'}
+          {t('category.empty')}
         </p>
       )}
     </section>
   )
 }
-
